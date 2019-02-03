@@ -12,3 +12,10 @@ end
 function innerCall()
 	print("<<<内部での関数呼び出し>>>")
 end
+
+-- 複数の戻り値を設定する場合
+function calc(a, b, c)
+	d = a + b + c
+	e = a * b * c
+	return d, e
+end

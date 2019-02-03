@@ -3,29 +3,9 @@
 
 #include "lua.hpp"
 
-/*class ABC
-{
-	const char *m_text;
-
-	public:
-		ABC()
-		{
-			m_text = "できた？";
-		}
-
-		const char *say()
-		{
-			return m_text;
-		}
-};
-*/
-
 int main()
 {
 	lua_State *lua = luaL_newstate();
-
-//	ABC *abc = new ABC();
-//	printf("Hello Lua[%s]\n", abc->say());
 
 	luaL_openlibs(lua);
 
