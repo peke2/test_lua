@@ -1,3 +1,5 @@
 vc
 *.exe
 *.s
+result.txt
+temp*.txt
