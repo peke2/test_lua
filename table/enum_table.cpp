@@ -244,6 +244,21 @@ int main()
 		//	stack top=1
 		//	[1]type=(string) / value=123.0
 	#endif
+
+	#if 0
+		//	「check」なのでスタック上の書き換えは無いと思ったが、typeが「string」に変わっている
+		lua_pushnumber(lua, 123);
+		output_stack(lua);
+		const char* n = luaL_checkstring(lua, -1);
+		output_stack(lua);
+
+		//	stack top=2
+		//	[2]type=(number) / value=123.000000
+		//	[1]type=(table) / value=
+		//	stack top=2
+		//	[2]type=(string) / value=123.0
+		//	[1]type=(table) / value=
+	#endif
 	}
 
 	lua_close(lua);
