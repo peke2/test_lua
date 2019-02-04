@@ -5,7 +5,7 @@ CC = g++
 OPT = -I../lua/include -L../lua/lib
 LIB = -llua
 
-TARGETS = call.exe from_lua.exe get_table.exe return_multi.exe
+TARGETS = call.exe from_lua.exe return_multi.exe
 
 all : $(TARGETS)
 
