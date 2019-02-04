@@ -134,6 +134,12 @@ int main()
 		lua_gettable(lua, -2);
 		output(lua);
 
+		printf("--------\n");
+		lua_getglobal(lua, "Stage");
+		lua_pushnil(lua);
+		lua_next(lua, -2);
+		output(lua);
+
 	}
 
 	lua_close(lua);
