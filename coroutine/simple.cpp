@@ -42,19 +42,6 @@ void output_stack(lua_State *lua)
 	}
 }
 
-
-int kfunc(lua_State *L, int status, lua_KContext ctx)
-{
-	printf("called\n");
-}
-
-/*int my_sub(lua_State *lua)
-{
-	printf("luaからの呼び出し");
-	return lua_yield(lua, );
-}*/
-
-
 int main()
 {
 	lua_State *lua = luaL_newstate();
@@ -70,22 +57,20 @@ int main()
 	}
 	else
 	{
-		//	コルーチンの呼び出しにスレッドの作成が必要と思ったが、そうでもなかった
-		lua_State *lua1 = lua_newthread(lua);
-		luaL_openlibs(lua1);
-		//lua_register(lua1, "sub", my_sub);
-		lua_getglobal(lua1, "flow");
+		//	luaスクリプト内の関数を呼ぶだけ
+		//	スクリプトからは coroutine.yield で適宜戻る
+		lua_getglobal(lua, "flow");
 
 		bool result;
-		result = lua_resume(lua1, 0, 0);
-		printf("結果[%d] 戻り値=[%s]\n",result, lua_tostring(lua1, lua_gettop(lua1)));
-		result = lua_resume(lua1, 0, 0);
-		printf("結果[%d] 戻り値=[%s]\n",result, lua_tostring(lua1, lua_gettop(lua1)));
-		result = lua_resume(lua1, 0, 0);
-		printf("結果[%d] 戻り値=[%s]\n",result, lua_tostring(lua1, lua_gettop(lua1)));
+		result = lua_resume(lua, 0, 0);
+		printf("結果[%d] 戻り値=[%s]\n",result, lua_tostring(lua, lua_gettop(lua)));
+		result = lua_resume(lua, 0, 0);
+		printf("結果[%d] 戻り値=[%s]\n",result, lua_tostring(lua, lua_gettop(lua)));
+		result = lua_resume(lua, 0, 0);
+		printf("結果[%d] 戻り値=[%s]\n",result, lua_tostring(lua, lua_gettop(lua)));
 		//	コルーチンが動いていなければ関数の戻り値は「false」 → luaスクリプト内と挙動が違う？
-		result = lua_resume(lua1, 0, 0);
-		printf("結果[%d] 戻り値=[%s]\n",result, lua_tostring(lua1, lua_gettop(lua1)));
+		result = lua_resume(lua, 0, 0);
+		printf("結果[%d] 戻り値=[%s]\n",result, lua_tostring(lua, lua_gettop(lua)));
 	}
 
 	//プログラムが終了するなら、呼び出さずに終わっても良い？

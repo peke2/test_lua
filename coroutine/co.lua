@@ -1,4 +1,4 @@
--- コルーチン
+-- luaスクリプト内でのコルーチン使用
 
 function flow()
 	coroutine.yield("World")

@@ -3,7 +3,7 @@ CC = g++
 OPT = -I../lua/include -L../lua/lib
 LIB = -llua
 
-TARGETS = co.exe
+TARGETS = co.exe simple.exe
 
 all : $(TARGETS)
 
