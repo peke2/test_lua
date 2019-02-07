@@ -6,8 +6,6 @@
 
 void output_stack(lua_State *lua)
 {
-	int value;
-
 	int top = lua_gettop(lua);
 	printf("stack top=%d\n", top);
 
