@@ -3,3 +3,4 @@ vc
 *.s
 result.txt
 temp*.txt
+*.stackdump
