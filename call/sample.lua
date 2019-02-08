@@ -19,3 +19,8 @@ function calc(a, b, c)
 	e = a * b * c
 	return d, e
 end
+
+-- C側の関数の引数を複数にしてテーブルを含めてみる
+function callWithTable()
+	fromLua(123, {x=3,y=5}, "abcdef")
+end
