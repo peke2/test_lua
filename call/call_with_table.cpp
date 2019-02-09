@@ -36,6 +36,27 @@ void output_stack(lua_State *lua)
 int fromLua(lua_State *lua)
 {
 	output_stack(lua);
+
+	//	戻り値は3つ、対象のテーブルは引数の先頭
+	//	arg3	<TOP
+	//	arg2
+	//	arg1
+	//	目的の「arg1」を取得するため、スタックの先頭2つを取り除く
+	lua_pop(lua, 2);
+
+	//	テーブルの中のそれぞれのキーの値を取得
+	float x , y;
+	lua_pushliteral(lua, "x");
+	lua_gettable(lua, -2);
+	x = lua_tonumber(lua, -1);
+	lua_pop(lua, 1);
+	lua_pushliteral(lua, "y");
+	lua_gettable(lua, -2);
+	y = lua_tonumber(lua, -1);
+	lua_pop(lua, 1);
+
+	printf("[%1.3f,%1.3f]\n", x, y);
+
 	return 0;
 }
 
@@ -59,19 +80,6 @@ int main()
 		lua_getglobal(lua, "callWithTable");
 		if(!lua_pcall(lua, 0, 0, 0))
 		{
-			lua_pop(lua, 1);
-
-			output_stack(lua);
-
-			float x , y;
-			lua_pushliteral(lua, "x");
-			lua_gettable(lua, -2);
-			x = lua_tonumber(lua, -1);
-			lua_pop(lua, 1);
-			lua_pushliteral(lua, "y");
-			lua_gettable(lua, -2);
-			y = lua_tonumber(lua, -1);
-			lua_pop(lua, 1);
 		}
 	}
 
