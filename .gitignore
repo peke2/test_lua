@@ -1,6 +1,6 @@
 vc
 *.exe
 *.s
-result.txt
+result*.txt
 temp*.txt
 *.stackdump
