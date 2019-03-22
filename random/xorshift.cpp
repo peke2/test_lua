@@ -60,6 +60,27 @@ int getXorshift(lua_State *lua)
 }
 
 
+int getXorshift32(lua_State *lua)
+{
+	int min = luaL_checkinteger(lua, -2);
+	int max = luaL_checkinteger(lua, -1);
+
+	static uint32_t y = 2;
+
+	y = y ^ (y << 13);
+	y = y ^ (y >> 17);
+	y = y ^ (y << 5);
+
+	uint32_t v = (y % (max+1 - min) + min);
+//	uint32_t v = y;
+
+	lua_pushnumber(lua, v);
+
+	return 1;	//戻り値の数
+}
+
+
+
 //	戻り値が複数持てるので、試しに読んでみる
 int main()
 {
@@ -69,6 +90,7 @@ int main()
 	const char *filename = "xorshift.lua";
 
 	lua_register(lua, "getXorshift", getXorshift);
+	lua_register(lua, "getXorshift32", getXorshift32);
 
 	if( luaL_loadfile(lua, filename) || lua_pcall(lua, 0,0,0) )
 	{
