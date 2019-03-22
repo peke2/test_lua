@@ -5,7 +5,7 @@ CC = g++
 OPT = -I../lua/include -L../lua/lib
 LIB = -llua
 
-TARGETS = seed1.exe seed2.exe seed3.exe seed4.exe seed5.exe
+TARGETS = seed1.exe seed2.exe seed3.exe seed4.exe seed5.exe xorshift.exe
 
 all : $(TARGETS)
 
