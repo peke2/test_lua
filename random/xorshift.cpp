@@ -38,10 +38,15 @@ int getXorshift(lua_State *lua)
 	int min = luaL_checkinteger(lua, -2);
 	int max = luaL_checkinteger(lua, -1);
 
-	static uint32_t x = 134698;
+/*	static uint32_t x = 123456789;
 	static uint32_t y = 362436069;
 	static uint32_t z = 521288629;
-	static uint32_t w = 88675123;
+	static uint32_t w = 88675123;*/
+	static uint32_t x = 1;
+	static uint32_t y = 2;
+	static uint32_t z = 3;
+	static uint32_t w = 4;
+
 	uint32_t t;
 	t = x ^ (x<<11);
 	x = y; y = z; z = w;
