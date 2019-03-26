@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <cstdlib>
+#include <algorithm>
 
 #include "lua.hpp"
 
@@ -62,8 +63,13 @@ int getXorshift(lua_State *lua)
 
 int getXorshift32(lua_State *lua)
 {
-	int min = luaL_checkinteger(lua, -2);
-	int max = luaL_checkinteger(lua, -1);
+	int v1 = luaL_checkinteger(lua, -2);
+	int v0 = luaL_checkinteger(lua, -1);
+
+	int min, max;
+
+	min = std::min(v0, v1);
+	max = std::max(v0, v1);
 
 	static uint32_t y = 2;
 
@@ -71,9 +77,9 @@ int getXorshift32(lua_State *lua)
 	y = y ^ (y >> 17);
 	y = y ^ (y << 5);
 
-	uint32_t v = (y % (max+1 - min) + min);
-//	uint32_t v = y;
+	int d = abs(max+1-min);
 
+	int v = (y % d) + min;
 	lua_pushnumber(lua, v);
 
 	return 1;	//戻り値の数
